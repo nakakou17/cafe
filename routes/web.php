@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\CafeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +29,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/', [PostController::class, 'index'])->name('index');//名前付きルート
+Route::get('/', [CafeController::class, 'index'])->name('index');//認証機能の名前付きルート
+//あとでPostコントローラーに変える
+
+Route::get('cafes', [CafeController::class, 'index'])->name('cafes.index');
+Route::get('/cafes/create', [CafeController::class, 'create']);
+Route::get('/cafes/{cafe}', [CafeController::class, 'show']);
+Route::post('/cafes', [CafeController::class, 'store']);
+
+
 
 require __DIR__.'/auth.php';
