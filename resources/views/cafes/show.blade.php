@@ -17,6 +17,9 @@
                 <p>{{ $cafe->address }}</p>    
             </div>
         </div>
+        <div class="edit">
+            <a href="/cafes/{{ $cafe->id }}/edit">編集する</a>
+        </div>
         <div class="footer">
             <a href="/cafes">戻る</a>
         </div>
