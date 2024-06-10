@@ -22,10 +22,10 @@ class CafeController extends Controller
     {
         return view('cafes.create');
     }
-    public function store(CafeRequest $request)//投稿作成処理用のコントローラー実装
+    public function store(Cafe $cafe, CafeRequest $request)
     {
-        $cafe = new Cafe();
-        $cafe->fill($request->input('cafe'))->save();
+        $input = $request['cafe'];
+        $cafe->fill($input)->save();
         return redirect('/cafes/' . $cafe->id);
     }
     public function delete(Cafe $cafe)

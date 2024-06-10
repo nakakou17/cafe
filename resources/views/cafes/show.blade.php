@@ -12,9 +12,13 @@
             {{ $cafe->name }}
         </h1>
         <div class="content">
-            <div class="content__post">
+            <div class="content__address">
                 <h3>住所</h3>
                 <p>{{ $cafe->address }}</p>    
+            </div>
+            <div class="content__opening_hours">
+                <h3>営業時間</h3>
+                <p>{{ $cafe->opening_hours }}</p>    
             </div>
         </div>
         <div class="edit">

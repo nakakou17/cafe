@@ -22,6 +22,11 @@
                 <p class="address__error" style="color:red">{{ $errors->first('cafe.address') }}</p>
                 @endif
             </div>
+            <div class="opening_hours">
+                <h2>営業時間</h2>
+                <textarea name="cafe[opening_hours]" placeholder="平日7:00 - 23:00土日8:00 - 21:00"value="{{ old('cafe.opening_hours') }}"></textarea></textarea>
+                <p class="opening_hours__error" style="color:red">{{ $errors->first('cafe.opening_hours') }}</p>
+            </div>
             <input type="submit" value="登録"/>
         </form>
         <div class="back">

@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CafeController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,6 @@ Route::get('/cafes/{cafe}/edit', [CafeController::class, 'edit']);
 Route::put('/cafes/{cafe}', [CafeController::class, 'update']);
 Route::delete('/cafes/{cafe}', [CafeController::class,'delete']);
 
-
+Route::get('/posts', [PostController::class, 'index']);
 
 require __DIR__.'/auth.php';

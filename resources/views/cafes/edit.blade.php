@@ -16,7 +16,11 @@
                 </div>
                 <div class='content__address'>
                     <h2>住所</h2>
-                    <input type='text' name='cafe[address]' value="{{ $cafe->address }}">
+                    <textarea name="cafe[address]" >{{ $cafe->address }}</textarea>
+                </div>
+                <div class='content__opening_hours'>
+                    <h2>営業時間</h2>
+                    <textarea name="cafe[opening_hours]" >{{ $cafe->opening_hours }}</textarea>
                 </div>
                 <input type="submit" value="更新">
             </form>

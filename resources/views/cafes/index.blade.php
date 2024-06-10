@@ -8,7 +8,7 @@
     </head>
     <body>
         <h1>カフェ一覧画面</h1>
-            <a href='/cafes/create'>新規追加</a>
+            <a href='/cafes/create'>新しいカフェを追加する</a>
             <div class='cafes'>
                 @foreach ($cafes as $cafe)
                     <div class='cafe'>
