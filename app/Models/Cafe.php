@@ -12,6 +12,7 @@ class Cafe extends Model
     protected $fillable = [
         'name',
         'address',
+        'opening_hours',
     ];
     
     public function getPaginateByLimit(int $limit_count = 10)

@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cafe;
+use App\Http\Requests\CafeRequest; 
 
 class CafeController extends Controller
 {
     public function index(Cafe $cafe)
     {
-        $cafes = Cafe::all();   //すべてのカフェを取得して表示
         return view('cafes.index')->with(['cafes' => $cafe->getPaginateByLimit(10)]);  //ビューにデータを渡す  
         //10件ごとにページネーションさせる
     }   
@@ -22,10 +22,27 @@ class CafeController extends Controller
     {
         return view('cafes.create');
     }
-    public function store(Request $request, Cafe $cafe)//投稿作成処理用のコントローラー実装
+    public function store(Cafe $cafe, CafeRequest $request)
     {
         $input = $request['cafe'];
-        $post->fill($input)->save();
-        return redirect('/cafes/' . $post->id);
+        $cafe->fill($input)->save();
+        return redirect('/cafes/' . $cafe->id);
     }
+    public function delete(Cafe $cafe)
+    {
+        $cafe->delete();
+        return redirect('/');
+    }
+    public function edit(Cafe $cafe)
+    {
+        return view('cafes.edit')->with(['cafe' => $cafe]);
+    }
+    public function update(CafeRequest $request, Cafe $cafe)
+    {
+        $input_cafe = $request['cafe'];
+        $cafe->fill($input_cafe)->save();
+    
+        return redirect('/cafes/' . $cafe->id);
+    }
+    
 }

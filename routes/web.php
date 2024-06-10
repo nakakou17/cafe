@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CafeController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +16,9 @@ use App\Http\Controllers\CafeController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [CafeController::class, 'index'])->name('index');//認証機能の名前付きルート
+//あとでPostコントローラーに変える
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -29,14 +30,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/', [CafeController::class, 'index'])->name('index');//認証機能の名前付きルート
-//あとでPostコントローラーに変える
 
 Route::get('cafes', [CafeController::class, 'index'])->name('cafes.index');
-Route::get('/cafes/create', [CafeController::class, 'create']);
-Route::get('/cafes/{cafe}', [CafeController::class, 'show']);
+Route::get('/cafes/create', [CafeController::class, 'create'])->name('cafes.create');
+Route::get('/cafes/{cafe}', [CafeController::class, 'show'])->name('cafes.show');
 Route::post('/cafes', [CafeController::class, 'store']);
+Route::get('/cafes/{cafe}/edit', [CafeController::class, 'edit']);
+Route::put('/cafes/{cafe}', [CafeController::class, 'update']);
+Route::delete('/cafes/{cafe}', [CafeController::class,'delete']);
 
-
+Route::get('/posts', [PostController::class, 'index']);
 
 require __DIR__.'/auth.php';
