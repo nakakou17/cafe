@@ -16,6 +16,7 @@ use App\Http\Controllers\PostController;
 |
 */
 
+
 Route::get('/', [CafeController::class, 'index'])->name('index');//認証機能の名前付きルート
 //あとでPostコントローラーに変える
 
@@ -36,9 +37,14 @@ Route::get('/cafes/create', [CafeController::class, 'create'])->name('cafes.crea
 Route::get('/cafes/{cafe}', [CafeController::class, 'show'])->name('cafes.show');
 Route::post('/cafes', [CafeController::class, 'store']);
 Route::get('/cafes/{cafe}/edit', [CafeController::class, 'edit']);
+Route::post('/cafes/{cafe}/posts', [PostController::class, 'store']);
 Route::put('/cafes/{cafe}', [CafeController::class, 'update']);
 Route::delete('/cafes/{cafe}', [CafeController::class,'delete']);
 
 Route::get('/posts', [PostController::class, 'index']);
+
+
+//Route::resource('cafes', CafeController::class);
+//Route::resource('posts', PostController::class);
 
 require __DIR__.'/auth.php';
