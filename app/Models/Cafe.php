@@ -20,5 +20,9 @@ class Cafe extends Model
         // addressで昇順に並べたあと、limitで件数制限をかける
         return $this->orderBy('address', 'ASC')->paginate($limit_count);
     }
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 
 }
