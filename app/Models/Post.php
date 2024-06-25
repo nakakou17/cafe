@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
+
 
 class Post extends Model
 {
     use HasFactory;
+    use Sortable;
     
     protected $fillable = [
         'user_id',
@@ -21,10 +24,16 @@ class Post extends Model
         'updated_at',
     ];
     
+    public $sortable = [
+        'recommend',
+        'noisy',
+        'time',
+        'updated_at',
+    ];
+    
     public function getPaginateByLimit(int $limit_count = 10)
     {
-        // 作成日を昇順に並び替える
-        return $this->orderBy('created_at', 'DESC')->paginate($limit_count);
+       return $this->orderBy('created_at', 'DESC')->paginate($limit_count);
     }
     
     public function cafe()

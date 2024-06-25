@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Cafe;
+use Illuminate\Support\Facades\Auth;
+
 
 class PostController extends Controller
 {
-    public function index(Post $post)
+    public function index(Post $post)//posts/index.blade.php使ってない??
     {
-        return view('posts.index')->with(['posts' => $post->getPaginateByLimit(10)]);
+        return view('cafes.show')->with(['posts' => $post->getPaginateByLimit(3)]);
     }
     public function store(Request $request, Cafe $cafe)
     {
@@ -23,13 +25,24 @@ class PostController extends Controller
             'post.body' => 'required|string|max:255',
         ]);
 
-        // 新しいPostインスタンスの作成
         $post = new Post();
         $post->cafe_id = $cafe->id;
         $post->user_id = auth()->id();
         $post->fill($validatedData['post']);
         $post->save();
 
-        return redirect()->route('cafes.show', ['cafe' => $cafe->id])->with('success', '口コミが登録されました！');
+        return redirect()->route('cafes.show', ['cafe' => $cafe->id]);
     }
+    public function delete(Post $post)
+    {
+        //現在のユーザーが投稿の所有者でない場合はエラーを表示させる。
+        if ($post->user_id !== Auth::id()) {
+            abort(403, '投稿者以外は削除できません');
+        }
+        //口コミを削除する
+        $cafeId = $post->cafe_id;
+        $post->delete();
+        return redirect('/cafes/' . $cafeId);
+    }
+
 }

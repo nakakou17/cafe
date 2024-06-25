@@ -41,6 +41,7 @@ Route::post('/cafes/{cafe}/posts', [PostController::class, 'store']);
 Route::put('/cafes/{cafe}', [CafeController::class, 'update']);
 Route::delete('/cafes/{cafe}', [CafeController::class,'delete']);
 
+Route::delete('/posts/{post}', [PostController::class,'delete']);
 Route::get('/posts', [PostController::class, 'index']);
 
 
