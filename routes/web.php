@@ -43,6 +43,9 @@ Route::delete('/cafes/{cafe}', [CafeController::class,'delete']);
 Route::delete('/posts/{post}', [PostController::class,'delete']);
 Route::get('/posts', [PostController::class, 'index']);
 
-
+Route::get('/logout', function () {
+    Auth::logout();
+    return redirect('/');
+});
 
 require __DIR__.'/auth.php';
