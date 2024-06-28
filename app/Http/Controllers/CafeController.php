@@ -11,10 +11,10 @@ class CafeController extends Controller
 {
     public function index(Cafe $cafe, Request $request)
     {
-        //クエリパラメータからsort対象の値を取得
+        // クエリパラメータからsort対象の値を取得
         $sort_value = $request->input('sort');
         
-        //通常はrecommend順にする
+        // 通常は recommend 順にする
         if (is_null($sort_value)) {
             $sort_value = 'recommend';
         }
@@ -22,19 +22,30 @@ class CafeController extends Controller
         // デフォルトは降順
         $sort_order = 'desc';
     
-        // もしsort_valueが noisy の場合は昇順にする
+        // もし sort_value が noisy の場合は昇順にする
         if ($sort_value === 'noisy') {
             $sort_order = 'asc';
         }
         
-        $cafes=Cafe::withCount([
+        // Cafe モデルからデータを取得する際に、avg_sort_value と avg_recommend_value を取得する
+        $cafes = Cafe::withCount([
             'posts AS avg_sort_value' => function ($query) use ($sort_value) {
-              $query->select(DB::raw("Avg({$sort_value}) as avg_sort_value"));
+                $query->select(DB::raw("Avg({$sort_value}) as avg_sort_value"));
+            },
+            'posts AS avg_recommend_value' => function ($query) {
+                $query->select(DB::raw("Avg(recommend) as avg_recommend_value"));
+            },
+            'posts AS avg_noisy_value' => function ($query) {
+                $query->select(DB::raw("Avg(noisy) as avg_noisy_value"));
+            },
+            'posts AS avg_time_value' => function ($query) {
+                $query->select(DB::raw("Avg(time) as avg_time_value"));
             }
-            ])->orderBy('avg_sort_value', $sort_order)->paginate(10);
+        ])->orderBy('avg_sort_value', $sort_order)->paginate(10);
         
         return view('cafes.index')->with(['cafes' => $cafes]);
-    } 
+    }
+
     
     public function show(Cafe $cafe)
     {

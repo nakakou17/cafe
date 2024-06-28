@@ -30,8 +30,11 @@
                             <h2 class='name'>
                                 <a href="/cafes/{{ $cafe->id }}">{{ $cafe->name }}</a>
                             </h2>
-                            <p class='address'>{{ $cafe->address }}</p>
+                            <p class='address'>住所：{{ $cafe->address }}</p>
                             <p class='opening_hours'>営業時間：{{ $cafe->opening_hours }}</p>
+                            <p class='avg_recommend_value'>平均おすすめ度：{{ number_format($cafe->avg_recommend_value, 1 ) }}</p>
+                            <p class='avg_noisy_value'>平均ガヤガヤ度：{{ number_format($cafe->avg_noisy_value, 1 ) }}</p>
+                            <p class='avg_time_value'>平均滞在時間：{{ number_format($cafe->avg_time_value, 1 ) }}</p>
                             
                             <form action="/cafes/{{ $cafe->id }}" id="form_{{ $cafe->id }}" method="post">
                                 @csrf

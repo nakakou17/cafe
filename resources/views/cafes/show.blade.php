@@ -87,6 +87,7 @@
                     <div class="p-3 bg-white border">
                         <h1 class="bg-secondary-subtle border border-dark p-3 text-center">口コミ一覧</h1>
                             
+                            
                         <div class="posts">
                             @foreach ($cafe->posts as $post)
                                 <div class="post mb-3 p-3 border rounded">
