@@ -56,7 +56,13 @@
                         }
                     }
                 </script>
+                    @auth
                     <p>ユーザー名：{{ auth()->user()->name }}</p>
+                    <a href="/logout">logout</a>
+                    @else
+                    <a href="/login">login</a>
+                    <a href="/register">register</a>
+                    @endauth
             </div>
         </div>
     </body>
