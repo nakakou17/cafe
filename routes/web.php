@@ -17,8 +17,7 @@ use App\Http\Controllers\PostController;
 */
 
 
-Route::get('/', [CafeController::class, 'index'])->name('index');//認証機能の名前付きルート
-//あとでPostコントローラーに変える
+Route::get('/', [CafeController::class, 'index'])->name('index');
 
 
 Route::get('/dashboard', function () {
@@ -45,7 +44,5 @@ Route::delete('/posts/{post}', [PostController::class,'delete']);
 Route::get('/posts', [PostController::class, 'index']);
 
 
-//Route::resource('cafes', CafeController::class);
-//Route::resource('posts', PostController::class);
 
 require __DIR__.'/auth.php';
